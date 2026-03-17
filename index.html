@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Saurabh Sharma | Space Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background:#020617;
+color:white;
+overflow-x:hidden;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* NAV */
+
+header{
+display:flex;
+justify-content:space-between;
+padding:25px 10%;
+backdrop-filter:blur(15px);
+}
+
+nav a{
+margin-left:20px;
+text-decoration:none;
+color:white;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:60px;
+}
+
+.hero span{
+color:#38bdf8;
+}
+
+.hero button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+background:#38bdf8;
+cursor:pointer;
+}
+
+/* GLASS SECTIONS */
+
+section{
+padding:100px 10%;
+text-align:center;
+}
+
+.glass{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+padding:40px;
+border-radius:20px;
+margin-top:40px;
+}
+
+/* PROJECT GRID */
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.project{
+padding:30px;
+border-radius:20px;
+background:rgba(255,255,255,0.05);
+transition:.4s;
+}
+
+.project:hover{
+transform:scale(1.05);
+box-shadow:0 0 30px #38bdf8;
+}
+
+/* CHATBOT */
+
+#chatbot{
+position:fixed;
+bottom:20px;
+right:20px;
+width:280px;
+background:#111;
+padding:15px;
+border-radius:15px;
+}
+
+#messages{
+height:150px;
+overflow-y:auto;
+font-size:14px;
+margin-bottom:10px;
+}
+
+input{
+width:100%;
+padding:8px;
+border:none;
+border-radius:5px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:40px;
+}
+.skills-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:40px;
+margin-top:40px;
+}
+
+.skill-box{
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+.bar{
+margin:15px 0;
+text-align:left;
+}
+
+.bar span{
+font-size:14px;
+}
+
+.progress{
+height:8px;
+background:#111;
+border-radius:10px;
+margin-top:5px;
+}
+
+.progress div{
+height:8px;
+background:#38bdf8;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>Saurabh</h2>
+
+<nav>
+
+<a href="#about">About</a> <a href="#skills">Skills</a> <a href="#projects">Projects</a> <a href="#contact">Contact</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Hi I'm <span>Saurabh Sharma</span></h1>
+<p>Full Stack Developer</p>
+
+<button onclick="document.getElementById('projects').scrollIntoView()">
+View Projects
+</button>
+
+</section>
+
+<section id="about">
+
+<h2>About Me</h2>
+
+<div class="glass">
+
+<p>
+I build modern web applications and immersive digital experiences using
+JavaScript, Node.js, React and advanced web technologies.
+</p>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2>Skills</h2>
+
+<div class="skills-container">
+
+<div class="skill-box">
+<h3>Frontend</h3>
+
+<div class="bar">
+<span>HTML</span>
+<div class="progress"><div style="width:90%"></div></div>
+</div>
+
+<div class="bar">
+<span>CSS</span>
+<div class="progress"><div style="width:85%"></div></div>
+</div>
+
+<div class="bar">
+<span>JavaScript</span>
+<div class="progress"><div style="width:80%"></div></div>
+</div>
+
+<div class="bar">
+<span>React</span>
+<div class="progress"><div style="width:70%"></div></div>
+</div>
+
+</div>
+
+
+<div class="skill-box">
+<h3>Backend</h3>
+
+<div class="bar">
+<span>Python</span>
+<div class="progress"><div style="width:75%"></div></div>
+</div>
+
+<div class="bar">
+<span>JAVA</span>
+<div class="progress"><div style="width:70%"></div></div>
+</div>
+
+<div class="bar">
+<span>C++</span>
+<div class="progress"><div style="width:70%"></div></div>
+</div>
+
+<div class="bar">
+<span>MySQL</span>
+<div class="progress"><div style="width:65%"></div></div>
+</div>
+
+</div>
+
+</div>
+
+
+
+<canvas id="skillChart"></canvas>
+
+</section>
+
+<section id="projects">
+
+<h2>Projects</h2>
+
+<div class="projects">
+
+<div class="project">
+<h3>Cactus Ecommerce</h3>
+<p>Full stack ecommerce platform.</p>
+</div>
+
+<div class="project">
+<h3>RJZS - WEBSITE</h3>
+<p>Personal website with heavy or modern design and full backend integration.</p>
+</div>
+
+<div class="project">
+<h3>College Website</h3>
+<p>Responsive college portal with admission form.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<div class="glass">
+
+<p>Email: saurabh7050sharma@gmail.com</p>
+<p>GitHub: github.com/saurabh705092</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Saurabh Sharma</p>
+
+</footer>
+
+<div id="chatbot">
+
+<div id="messages"></div>
+
+<input id="userInput" placeholder="Ask something...">
+
+</div>
+
+<script>
+
+/* 3D SPACE BACKGROUND */
+
+const scene=new THREE.Scene()
+
+const camera=new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+)
+
+const renderer=new THREE.WebGLRenderer({alpha:true})
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+
+document.body.appendChild(renderer.domElement)
+
+/* stars */
+
+const starGeometry=new THREE.BufferGeometry()
+
+const starCount=500
+
+const positions=[]
+
+for(let i=0;i<starCount;i++){
+
+positions.push((Math.random()-0.5)*1000)
+positions.push((Math.random()-0.5)*1000)
+positions.push((Math.random()-0.5)*1000)
+
+}
+
+starGeometry.setAttribute(
+'position',
+new THREE.Float32BufferAttribute(positions,3)
+)
+
+const starMaterial=new THREE.PointsMaterial({color:0xffffff})
+
+const stars=new THREE.Points(starGeometry,starMaterial)
+
+scene.add(stars)
+
+/* planet */
+
+const geometry=new THREE.SphereGeometry(5,32,32)
+
+const material=new THREE.MeshBasicMaterial({
+color:0x38bdf8,
+wireframe:true
+})
+
+const planet=new THREE.Mesh(geometry,material)
+
+scene.add(planet)
+
+camera.position.z=20
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+planet.rotation.y+=0.002
+stars.rotation.y+=0.0005
+
+renderer.render(scene,camera)
+
+}
+
+animate()
+
+/* skills chart */
+
+new Chart(document.getElementById("skillChart"),{
+
+type:"radar",
+
+data:{
+
+labels:["HTML","CSS","JS","React","Node","MongoDB"],
+
+datasets:[{
+
+label:"Skills",
+
+data:[90,85,80,70,75,70]
+
+}]
+
+}
+
+})
+
+/* chatbot */
+
+const input=document.getElementById("userInput")
+const messages=document.getElementById("messages")
+
+input.addEventListener("keypress",e=>{
+
+if(e.key==="Enter"){
+
+const text=input.value
+
+messages.innerHTML+=`<div>You: ${text}</div>`
+
+let reply="Ask about my skills or projects."
+
+if(text.toLowerCase().includes("skills"))
+reply="I work with JavaScript, React, Node and databases."
+
+if(text.toLowerCase().includes("project"))
+reply="I built ecommerce,personal and college web apps."
+
+messages.innerHTML+=`<div>Bot: ${reply}</div>`
+
+input.value=""
+
+}
+
+})
+
+</script>
+
+</body>
+</html>
